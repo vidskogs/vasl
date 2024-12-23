@@ -167,7 +167,7 @@
 		<boarddata name="b" version="6.4" versionDate="2023/01/30" description="" boardType="Deluxe" publisher="MMP" issued="" />
 		<boarddata name="c" version="6.4" versionDate="2023/01/30" description="" boardType="Deluxe" publisher="MMP" issued="" />
 		<boarddata name="d" version="6.6" versionDate="2023/01/30" description="" boardType="Deluxe" publisher="MMP" issued="" />
-		<boarddata name="e" version="6.6" versionDate="2023/12/30" description="" boardType="Deluxe" publisher="MMP" issued="" />
+		<boarddata name="e" version="6.7" versionDate="2024/12/23" description="" boardType="Deluxe" publisher="MMP" issued="" />
 		<boarddata name="f" version="6.4" versionDate="2023/12/30" description="" boardType="Deluxe" publisher="MMP" issued="" />
 		<boarddata name="g" version="6.5" versionDate="2023/12/30" description="" boardType="Deluxe" publisher="MMP" issued="" />
 		<boarddata name="gSK" version="1.3" versionDate="2024/12/05" description="" boardType="Starter Kit" publisher="MMP" issued="" />
@@ -211,16 +211,16 @@
 		<boarddata name="BFP1" version="6.4" versionDate="2023/01/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFP2" version="6.5" versionDate="2023/01/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPA" version="6.5" versionDate="2023/11/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
-		<boarddata name="BFPB" version="6.4" versionDate="2023/01/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
+		<boarddata name="BFPB" version="6.5" versionDate="2024/12/23" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPC" version="6.6" versionDate="2023/11/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPD" version="6.5" versionDate="2023/11/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPE" version="6.6" versionDate="2023/01/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPF" version="6.4" versionDate="2023/01/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPG" version="6.4" versionDate="2023/01/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
-		<boarddata name="BFPH" version="6.6" versionDate="2023/11/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
-		<boarddata name="BFPI" version="6.7" versionDate="2023/11/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
-		<boarddata name="BFPJ" version="6.7" versionDate="2023/11/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
-		<boarddata name="BFPK" version="6.7" versionDate="2023/11/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
+		<boarddata name="BFPH" version="6.7" versionDate="2024/12/23" description="" boardType="Geoboard" publisher="BFP" issued="" />
+		<boarddata name="BFPI" version="6.8" versionDate="2024/12/23" description="" boardType="Geoboard" publisher="BFP" issued="" />
+		<boarddata name="BFPJ" version="6.8" versionDate="2024/12/23" description="" boardType="Geoboard" publisher="BFP" issued="" />
+		<boarddata name="BFPK" version="6.8" versionDate="2024/12/23" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPL" version="6.5" versionDate="2023/11/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPM" version="6.4" versionDate="2023/11/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPN" version="6.4" versionDate="2023/01/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
