@@ -215,7 +215,7 @@
 		<boarddata name="BFPC" version="6.6" versionDate="2023/11/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPD" version="6.6" versionDate="2024/12/24" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPE" version="6.7" versionDate="2024/12/24" description="" boardType="Geoboard" publisher="BFP" issued="" />
-		<boarddata name="BFPF" version="6.8" versionDate="2024/12/24" description="" boardType="Geoboard" publisher="BFP" issued="" />
+		<boarddata name="BFPF" version="6.5" versionDate="2024/12/24" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPG" version="6.4" versionDate="2023/01/30" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPH" version="6.7" versionDate="2024/12/23" description="" boardType="Geoboard" publisher="BFP" issued="" />
 		<boarddata name="BFPI" version="6.8" versionDate="2024/12/23" description="" boardType="Geoboard" publisher="BFP" issued="" />
