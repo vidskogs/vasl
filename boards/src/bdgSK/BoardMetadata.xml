@@ -20,9 +20,9 @@
 	
 -->
 <boardMetadata 
-	name="gSK" 
-	version="1.3" 
-	versionDate="Dec 4,2024" 
+	name="g Starter Kit" 
+	version="2.0" 
+	versionDate="Dec 27,2024" 
 	author="Arvid Skogsholm" 
 	boardImageFileName="bdgSK.gif" 
 	hasHills="FALSE" 
