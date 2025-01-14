@@ -36,12 +36,7 @@ import VASSAL.build.GameModule;
 import VASSAL.build.module.GameComponent;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.PieceWindow;
-import VASSAL.build.module.map.BoardPicker;
-import VASSAL.build.module.map.MapShader;
-import VASSAL.build.module.map.PieceMover;
-import VASSAL.build.module.map.StackMetrics;
 import VASSAL.build.module.map.boardPicker.Board;
-import VASSAL.build.module.properties.ChangePropertyCommandEncoder;
 import VASSAL.build.widget.ListWidget;
 import VASSAL.build.widget.PanelWidget;
 import VASSAL.build.widget.PieceSlot;
@@ -49,14 +44,9 @@ import VASSAL.configure.*;
 import VASSAL.counters.GamePiece;
 import VASSAL.counters.Properties;
 import VASSAL.counters.Stack;
-import VASSAL.i18n.Resources;
 import VASSAL.tools.DataArchive;
 import VASSAL.tools.ErrorDialog;
-import VASSAL.tools.KeyStrokeSource;
 import VASSAL.tools.imageop.Op;
-import VASSAL.tools.swing.SplitPane;
-import VASSAL.tools.swing.SwingUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.jdom2.JDOMException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -441,7 +431,7 @@ public class ASLMap extends Map {
      * A class that allows the LOSData, Graphic image and point information to be passed to various methods and classes
      * Note that all properties are public to eliminate getter/setter clutter
      */
-    private class LOSonOverlays {
+    public class LOSonOverlays {
         public VASL.LOS.Map.Map newlosdata;
         public BufferedImage bi;
         public VASLBoard board;
@@ -515,7 +505,7 @@ public class ASLMap extends Map {
                                 losonoverlays.newlosdata.gridToHex(losonoverlays.newlosdata.getGridWidth() - losonoverlays.ovrrec.x  -losonoverlays.currentx -1, losonoverlays.newlosdata.getGridHeight() - losonoverlays.ovrrec.y -losonoverlays.currenty -1).getCenterLocation().setTerrain(losonoverlays.newlosdata.getTerrain(terraintouse));
                             }
                             else {
-                                losonoverlays.newlosdata.gridToHex(losonoverlays.newlosdata.getGridWidth() - losonoverlays.ovrrec.x  -losonoverlays.currentx -1, losonoverlays.newlosdata.getGridHeight() - losonoverlays.ovrrec.y -losonoverlays.currenty -1).getCenterLocation().setBaseHeight(1);
+                                losonoverlays.newlosdata.gridToHex(losonoverlays.newlosdata.getGridWidth() - losonoverlays.ovrrec.x  -losonoverlays.currentx -1, losonoverlays.newlosdata.getGridHeight() - losonoverlays.ovrrec.y -losonoverlays.currenty -1).getCenterLocation().setLevelInHex(1);
                             }
                         }
                     }
@@ -541,7 +531,7 @@ public class ASLMap extends Map {
                                 losonoverlays.newlosdata.gridToHex(losonoverlays.currentx + losonoverlays.ovrrec.x, losonoverlays.currenty + losonoverlays.ovrrec.y).getCenterLocation().setTerrain(losonoverlays.newlosdata.getTerrain(terraintouse));
                             }
                             else {
-                                losonoverlays.newlosdata.gridToHex(losonoverlays.currentx + losonoverlays.ovrrec.x, losonoverlays.currenty + losonoverlays.ovrrec.y).getCenterLocation().setBaseHeight(1);
+                                losonoverlays.newlosdata.gridToHex(losonoverlays.currentx + losonoverlays.ovrrec.x, losonoverlays.currenty + losonoverlays.ovrrec.y).getCenterLocation().setLevelInHex(1);
                             }
                         }
                     }
@@ -750,7 +740,7 @@ public class ASLMap extends Map {
                             losonoverlays.newlosdata.setGridTerrainCode(losonoverlays.newlosdata.getTerrain(terraintouse).getType(), losonoverlays.newlosdata.getGridWidth() - losonoverlays.ovrrec.x  -losonoverlays.currentx -1, losonoverlays.newlosdata.getGridHeight() - losonoverlays.ovrrec.y -losonoverlays.currenty -1);
                             if (terraintouse == "Wadi") {
                                 losonoverlays.newlosdata.gridToHex(losonoverlays.newlosdata.getGridWidth() - losonoverlays.ovrrec.x - losonoverlays.currentx - 1, losonoverlays.newlosdata.getGridHeight() - losonoverlays.ovrrec.y - losonoverlays.currenty - 1).getCenterLocation().setTerrain(losonoverlays.newlosdata.getTerrain("Wadi"));
-                                losonoverlays.newlosdata.gridToHex(losonoverlays.newlosdata.getGridWidth() - losonoverlays.ovrrec.x - losonoverlays.currentx - 1, losonoverlays.newlosdata.getGridHeight() - losonoverlays.ovrrec.y - losonoverlays.currenty - 1).getCenterLocation().setBaseHeight(-1);
+                                losonoverlays.newlosdata.gridToHex(losonoverlays.newlosdata.getGridWidth() - losonoverlays.ovrrec.x - losonoverlays.currentx - 1, losonoverlays.newlosdata.getGridHeight() - losonoverlays.ovrrec.y - losonoverlays.currenty - 1).getCenterLocation().setLevelInHex(-1);
                             }
                         }
                     }
@@ -780,7 +770,7 @@ public class ASLMap extends Map {
                             losonoverlays.newlosdata.setGridTerrainCode(losonoverlays.newlosdata.getTerrain(terraintouse).getType(), losonoverlays.currentx + losonoverlays.ovrrec.x, losonoverlays.currenty + losonoverlays.ovrrec.y);
                             if (terraintouse == "Wadi") {
                                 losonoverlays.newlosdata.gridToHex(losonoverlays.currentx + losonoverlays.ovrrec.x, losonoverlays.currenty + losonoverlays.ovrrec.y).getCenterLocation().setTerrain(losonoverlays.newlosdata.getTerrain("Wadi"));
-                                losonoverlays.newlosdata.gridToHex(losonoverlays.currentx + losonoverlays.ovrrec.x, losonoverlays.currenty + losonoverlays.ovrrec.y).getCenterLocation().setBaseHeight(-1);
+                                losonoverlays.newlosdata.gridToHex(losonoverlays.currentx + losonoverlays.ovrrec.x, losonoverlays.currenty + losonoverlays.ovrrec.y).getCenterLocation().setLevelInHex(-1);
                                 // need to set depression and cliff hexsides, but how?
                             }
                         }
@@ -868,7 +858,7 @@ public class ASLMap extends Map {
                                     // this sets base elevation for the hex - crest line & depression hexes can contain multiple elevations
                                     // hack for LFT3; change if applies to other boards
                                     if (!losonoverlays.board.getVASLBoardArchive().getVASLColorName(color).contains("SnowHexDots2")) {
-                                        losonoverlays.newlosdata.gridToHex(losonoverlays.overpositionx, losonoverlays.overpositiony).setBaseHeight(elevint);
+                                        losonoverlays.newlosdata.gridToHex(losonoverlays.overpositionx, losonoverlays.overpositiony).setBaseLevelofHex(elevint);
                                     }
                                 }
                             }
@@ -928,7 +918,7 @@ public class ASLMap extends Map {
                                         }
                                         // this sets base elevation for the hex - crest line & depression hexes can contain multiple elevations
                                         if (elevint != -99) {
-                                            losonoverlays.newlosdata.gridToHex(losonoverlays.overpositionx, losonoverlays.overpositiony).setBaseHeight(elevint);
+                                            losonoverlays.newlosdata.gridToHex(losonoverlays.overpositionx, losonoverlays.overpositiony).setBaseLevelofHex(elevint);
                                         }
                                     }
                                 }
@@ -989,7 +979,7 @@ public class ASLMap extends Map {
                                         // this sets base elevation for the hex - crest line & depression hexes can contain multiple elevations
                                         // hack for LFT3; change if applies to other boards
                                         if (!losonoverlays.board.getVASLBoardArchive().getVASLColorName(color).contains("SnowHexDots2")) {
-                                            losonoverlays.newlosdata.gridToHex(losonoverlays.overpositionx, losonoverlays.overpositiony).setBaseHeight(elevint);
+                                            losonoverlays.newlosdata.gridToHex(losonoverlays.overpositionx, losonoverlays.overpositiony).setBaseLevelofHex(elevint);
                                         }
 
                                     }
@@ -1030,7 +1020,7 @@ public class ASLMap extends Map {
                                         }
                                         // this sets base elevation for the hex - crest line & depression hexes can contain multiple elevations
                                         if (elevint != -99) {
-                                            losonoverlays.newlosdata.gridToHex(losonoverlays.overpositionx, losonoverlays.overpositiony).setBaseHeight(elevint);
+                                            losonoverlays.newlosdata.gridToHex(losonoverlays.overpositionx, losonoverlays.overpositiony).setBaseLevelofHex(elevint);
                                         }
                                     }
                                 }
