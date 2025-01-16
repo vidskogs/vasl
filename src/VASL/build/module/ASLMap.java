@@ -54,6 +54,7 @@ import org.w3c.dom.Element;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.dnd.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -139,7 +140,48 @@ public class ASLMap extends Map {
     @Override
     public void addTo(Buildable b) {
         super.addTo(b);
-        this.theMap.setDropTarget(ASLPieceMover.DragHandler.makeDropTarget(this.theMap, 2, this));
+
+        // This code is added to fix an issue with Linux users when using seperate windows, the drag
+        // gesture is not reinitializing the counter image when entering the main map from the VASL
+        // counters window. The issue is that the main map uses the ASLPiecemover and the counter window
+        // uses the older Piecemover.
+        if (System.getProperty("os.name").contains("nux")){
+            DropTargetListener aslPieceListener = ASLPieceMover.DragHandler.makeDropTarget(this.theMap, 2, this);
+            DropTargetListener pieceListener = PieceMover.DragHandler.makeDropTarget(this.theMap, 2, this);
+
+            // Define the combined listener
+            DropTargetListener combinedListener = new DropTargetListener() {
+                @Override
+                public void dragEnter(DropTargetDragEvent dtde) {
+                    pieceListener.dragEnter(dtde);
+                }
+
+                @Override
+                public void dragOver(DropTargetDragEvent dtde) {
+                    aslPieceListener.dragOver(dtde);
+                }
+
+                @Override
+                public void dropActionChanged(DropTargetDragEvent dtde) {
+                    aslPieceListener.dropActionChanged(dtde);
+                }
+
+                @Override
+                public void dragExit(DropTargetEvent dte) {
+                    aslPieceListener.dragExit(dte);
+                }
+
+                @Override
+                public void drop(DropTargetDropEvent dtde) {
+                    aslPieceListener.drop(dtde);
+                }
+            };
+
+            // Set the DropTarget with the combined listener
+            this.theMap.setDropTarget(new DropTarget(this.theMap, DnDConstants.ACTION_MOVE, combinedListener, true));
+        } else {
+            this.theMap.setDropTarget(ASLPieceMover.DragHandler.makeDropTarget(this.theMap, 2, this));
+        }
     }
 
   /*
@@ -1593,6 +1635,18 @@ public class ASLMap extends Map {
         final double dzoom = getZoom() * os_scale;
 
         GamePiece[] stack = pieces.getPieces();
+        // Create a java.util.map indication how many stacks are at each point on the map
+        // This is used to determine if a HIP stack has enemy game pieces at the same location
+        java.util.Map<Point, Integer> pieceMap = new HashMap<Point, Integer>();
+        for (int i = 0; i < stack.length; ++i) {
+            // increment the count of pieces at this point
+            Point pt = stack[i].getPosition();
+            Integer count = pieceMap.get(pt);
+            if (count == null) {
+                count = 0;
+            }
+            pieceMap.put(pt, count + 1);
+        }
 
         for (int i = 0; i < stack.length; ++i)
         {
@@ -1603,7 +1657,13 @@ public class ASLMap extends Map {
 
             if (stack[i].getClass() == Stack.class)
             {
-                if (showmaplevel == ShowMapLevel.ShowAll) {
+                // If a unit is HIP and there are more than one stack in that location,
+                // we offset the hidden units so they are visible to owner
+                if (stack[i].getName().contains("HIP") && pieceMap.get(stack[i].getPosition()) != null && pieceMap.get(stack[i].getPosition()) > 1) {
+                    // Create an offset point for the hidden stack
+                    Point hiddenpoint = new Point(pt.x - 15, pt.y - 15);
+                    getStackMetrics().draw((Stack) stack[i], hiddenpoint, g, this, dzoom*pZoom, visibleRect);
+                } else if (showmaplevel == ShowMapLevel.ShowAll) {
                     //JY
                     //getStackMetrics().draw((Stack) stack[i], pt, g, this, dzoom, visibleRect);
                     getStackMetrics().draw((Stack) stack[i], pt, g, this, dzoom*pZoom, visibleRect);
